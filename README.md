@@ -9,8 +9,7 @@ This module creates S3-Terraform configuration to deploy a basic static website 
 ```hcl
 
 module "website" {
-  source                     = "./modules/s3_with_cloudfront"
-  project_name               = "example"
+  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.example.arn
 }
@@ -22,8 +21,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "./modules/s3_with_cloudfront"
-  project_name               = "example"
+  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
   domain                     = "example.com"
   error_document             = "index.html"
   index_document             = "error.html"
@@ -35,8 +33,7 @@ module "website" {
 ### WAF integration
 ```hcl
 module "website" {
-  source                     = "./modules/s3_with_cloudfront"
-  project_name               = "example"
+  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.website_certificate.arn
   waf_acl_id                 = aws_wafv2_web_acl.example.arn
@@ -50,8 +47,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "./modules/s3_with_cloudfront"
-  project_name               = "example"
+  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.example.arn
   custom_error_responses = [
@@ -78,8 +74,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "./modules/s3_with_cloudfront"
-  project_name               = "example"
+  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
   domain                     = "example.com"
   error_document             = "index.html"
   index_document             = "error.html"
@@ -102,7 +97,7 @@ module "website" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.14.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.14.0 |
 
 ## Modules
 
@@ -134,7 +129,6 @@ No modules.
 | <a name="input_domain"></a> [domain](#input\_domain) | (Required) - The domain of the website (example.com), this value will be used to name the bucket and configure the cloudfront distribution | `string` | n/a | yes |
 | <a name="input_error_document"></a> [error\_document](#input\_error\_document) | (Optional) - the index\_document. By default error\_document is setted to index.html | `string` | `"index.html"` | no |
 | <a name="input_index_document"></a> [index\_document](#input\_index\_document) | (Optional) - the index\_document. By default index\_document is setted to index.html | `string` | `"index.html"` | no |
-| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | (Required) - This value will be used in comments and tags | `string` | n/a | yes |
 | <a name="input_response_headers_policy_id"></a> [response\_headers\_policy\_id](#input\_response\_headers\_policy\_id) | (Optional) - aws\_cloudfront\_response\_headers\_policy id | `string` | `""` | no |
 | <a name="input_waf_acl_id"></a> [waf\_acl\_id](#input\_waf\_acl\_id) | (Oprional) - aws\_wafv2\_web\_acl arn or aws\_waf\_web\_acl id | `string` | `""` | no |
 

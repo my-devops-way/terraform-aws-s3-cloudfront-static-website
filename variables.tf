@@ -1,7 +1,3 @@
-variable "project_name" {
-  type        = string
-  description = "(Required) - This value will be used in comments and tags"
-}
 variable "domain" {
   type        = string
   description = "(Required) - The domain of the website (example.com), this value will be used to name the bucket and configure the cloudfront distribution"
