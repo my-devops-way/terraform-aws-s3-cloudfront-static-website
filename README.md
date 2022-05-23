@@ -1,6 +1,6 @@
 # AWS S3-CloudFront Terraform Module (static website infra)
 This module creates S3-Terraform configuration to deploy a basic static website in AWS.
-![aws_s3_cloudfront](/../../../../my-devops-way/CICD/blob/main/svg/front/aws-s3-cloudfront.svg)
+![aws_s3_cloudfront](https://github.com/my-devops-way/CICD/blob/main/svg/front/aws-s3-cloudfront.svg?raw=true)
 
 ## Usage
 
@@ -9,7 +9,7 @@ This module creates S3-Terraform configuration to deploy a basic static website 
 ```hcl
 
 module "website" {
-  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
+  source                     = "my-devops-way/s3-cloudfront-static-website/aws"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.example.arn
 }
@@ -21,7 +21,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
+  source                     = "my-devops-way/s3-cloudfront-static-website/aws"
   domain                     = "example.com"
   error_document             = "index.html"
   index_document             = "error.html"
@@ -33,7 +33,7 @@ module "website" {
 ### WAF integration
 ```hcl
 module "website" {
-  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
+  source                     = "my-devops-way/s3-cloudfront-static-website/aws"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.website_certificate.arn
   waf_acl_id                 = aws_wafv2_web_acl.example.arn
@@ -47,7 +47,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
+  source                     = "my-devops-way/s3-cloudfront-static-website/aws"
   domain                     = "example.com"
   acm_certificate_arn        = aws_acm_certificate.example.arn
   custom_error_responses = [
@@ -74,7 +74,7 @@ module "website" {
 ```hcl
 
 module "website" {
-  source                     = "github.com/my-devops-way/terraform-aws-s3-cloudfront-static-website.git"
+  source                     = "my-devops-way/s3-cloudfront-static-website/aws"
   domain                     = "example.com"
   error_document             = "index.html"
   index_document             = "error.html"
