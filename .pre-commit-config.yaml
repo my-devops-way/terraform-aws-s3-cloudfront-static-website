@@ -1,0 +1,25 @@
+---
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.68.1
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_tflint
+      - id: terraform_tfsec
+        args: ["."]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.16.0"
+    hooks:
+      - id: terraform-docs-go
+        args: [
+          "markdown",
+          "table",
+          "--output-file",
+          "README.md",
+          "./"
+        ]
