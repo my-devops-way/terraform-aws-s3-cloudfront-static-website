@@ -1,0 +1,107 @@
+---
+formatter: ""   # this is required
+
+version: ""
+
+header-from: "./docs/HEADER.md"
+footer-from: ""
+
+recursive:
+  enabled: false
+  path: modules
+
+sections:
+  hide: []
+  show: []
+
+content: |-
+
+  {{ .Header }}
+  ## Examples
+  <details>
+
+    **<summary> Basic configuration </summary>**
+
+    ```hcl
+    {{ include "./examples/basic_configuration/main.tf" }}
+    ```
+  </details>
+  <details>
+
+    **<summary> Setting custom index_document and error_document </summary>**
+
+    ```hcl
+    {{ include "./examples/custom_index_file/main.tf" }}
+    ```
+  </details>
+  <details>
+
+    **<summary> WAF integration </summary>**
+
+    ```hcl
+    {{ include "./examples/waf_integration/main.tf" }}
+    ```
+  </details>
+  <details>
+
+    **<summary> Custom error responses </summary>**
+
+    ```hcl
+    {{ include "./examples/custom_error_response/main.tf" }}
+    ```
+  </details>
+  <details>
+
+    **<summary> Cloudfront cache_policy and response_headers_policy </summary>**
+
+    ```hcl
+    {{ include "./examples/cache_policy_and_response_headers_policy/main.tf" }}
+    ```
+  </details>
+  <details>
+
+    **<summary> Full example with ACM certificate and R53 record </summary>**
+
+    ```hcl
+    {{ include "./examples/full_example_with_acm_and_r53/main.tf" }}
+    ```
+  </details>
+
+  {{ .Requirements }}
+  {{ .Providers }}
+  {{ .Modules }}
+  {{ .Resources }}
+  {{ .Inputs }}
+  {{ .Outputs }}
+  {{ .Footer }}
+
+output:
+  file: ""
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: false
+  description: false
+  escape: true
+  hide-empty: false
+  html: true
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: false
+  sensitive: true
+  type: true
