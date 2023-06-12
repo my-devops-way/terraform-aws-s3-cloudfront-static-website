@@ -31,7 +31,7 @@ resource "aws_acm_certificate_validation" "this" {
 
 module "website" {
   source              = "my-devops-way/s3-cloudfront-static-website/aws"
-  domain              = "mydevopsway.com"
+  domain              = local.domain
   acm_certificate_arn = aws_acm_certificate.this.arn
 }
 
