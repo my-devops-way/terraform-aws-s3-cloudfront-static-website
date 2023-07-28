@@ -41,12 +41,16 @@ resource "aws_s3_bucket_versioning" "this" {
     status = "Enabled"
   }
 }
+#tfsec:ignore:aws-s3-block-public-acls
+#tfsec:ignore:aws-s3-block-public-policy
+#tfsec:ignore:aws-s3-ignore-public-acls
+#tfsec:ignore:aws-s3-no-public-buckets
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket                  = aws_s3_bucket.this.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.id
@@ -58,7 +62,7 @@ resource "aws_s3_bucket_policy" "this" {
             "Sid": "PublicReadGetObject",
             "Effect": "Allow",
             "Principal": {
-              "AWS": "${aws_cloudfront_origin_access_identity.this.iam_arn}"
+              "AWS": "*"
             },
             "Action": [
                 "s3:GetObject"
@@ -76,16 +80,18 @@ POLICY
 # Cloudfront Distribution Resources
 # #################################
 
-resource "aws_cloudfront_origin_access_identity" "this" {
-  comment = var.domain
-}
+
 #tfsec:ignore:aws-cloudfront-enable-logging
 resource "aws_cloudfront_distribution" "this" {
   origin {
-    domain_name = aws_s3_bucket.this.bucket_regional_domain_name
+    domain_name = aws_s3_bucket_website_configuration.this.website_endpoint
     origin_id   = "s3-${aws_s3_bucket.this.bucket}"
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
   }
   enabled         = true
